@@ -1,0 +1,235 @@
+Effective Cpp notes
+
+
+Introduction:
+
+extern int x; 				II object declaration
+int numDigits(int number); 		II function declaration
+class Clock; 				II function declaration
+template class SmartPointer; 		II template declaration
+
+int x; 						II object definition
+
+int numDigits(int number) { 			II function definition 
+int digitsSoFar = 1;			
+
+if (number < 0) { 
+number = -number; 
+++digitsSoFar;
+}
+while (number 1= 10) ++digitsSoFar; 
+
+return digitsSoFar;
+}
+
+
+class Clock {					II class definition
+public: 
+Clock () ; 
+~Clock() ;
+
+int hour() const; 
+int minute() const; 
+int second() const; 
+} ;
+ 
+template<class T>
+class SmartPointer {				II template definition
+public: 
+SmartPointer(T *p = 0); 
+~SmartPointer(); 
+T * operator->() const; 
+T& operator*() const; 
+} ;
+
+Default Constructors:
+
+class A {
+public: 
+A(); 			II default constructor
+}; 
+A arrayA[10]; 			II 10 constructors called
+
+class B { 
+public: 
+B(int x = 0); 		II default constructor
+}; 
+B arrayB[10];			II 10 constructors called,
+
+class C {
+public:
+	C(int x);		|| not a default constructor
+};
+C arrayC[10];			|| error!
+
+
+
+Manual bool type since before Cpp didn’t have this
+typedef int bool
+const bool false = 0;
+const bool true = 1;
+
+
+Old C-style casts
+(type) expression
+// case expression to be of type type
+
+
+New cpp casts
+static_cast<type>(expression)
+const_cast<type>(expression)
+dynamic_cast<type>(expression)
+reinterpret_cast<type>(expression)
+
+Look up the diff use cases but just remember static_cast is a catch-all cast
+
+These cpp casts are preferable b/c they are easy to identify and understand and allow users to grep the keyword and for compilers to diagnose usage error
+
+
+Author’s naming convention
+string *ps 		// ps = ptr to string
+
+class Airplane;
+Airplane *pa;		// pa = ptr to Airplane
+
+class BankAccount;
+BankAccount *pba;	// pba = ptr to BankAccount
+
+rs = reference to string as an example
+
+
+
+
+
+
+
+
+
+
+Shifting from C to C++
+
+Item 1: Prefer const and inline to #define
+
+“Prefer the compiler to the preprocessor”
+
+#define ASPECT_RATIO 1.653 for example
+
+The symbolic name ASPECT_RATIO may never be seen by compilers; it may be removed by the preprocessor before the source code ever gets to a compiler.
+
+Thus, that name may not be entered into the symbol table and will result in confusing errors during compilation on incorrect usage of the const and more problems arise when this define is created else where like in another header file
+
+Solution:  const double ASPECT_RATIO = 1.653;
+
+
+2 wrinkles with these though:
+
+Constant pointers 
+const definitions are typically in header files (many source files will include them).
+Important for the ptr to be declared const and what the ptr points to should be const
+
+And this includes some semantic wrinkles like so,
+const char * const authorName = “Scott Meyers”;
+
+Class-specific constants
+make the const be apart of the class’s scope and make it static to ensure one copy of the const
+
+class GamePlayer { 
+private: 
+static const int NUM_TURNS = 5;	// constant declaration
+int scores[NUM_TURNS]; 		// use of constant
+…
+} ;
+
+Wrinkle here is the const is a declaration, not a definition.
+You must still define static class members in an implementation file:
+
+const int GamePlayer::NUM_TURNS;	// mandatory definition and goes in class impl. File
+
+
+Wrinkle 2 continued:
+
+Older compilers may not accept the above syntax b/c it is illegal to provide an initial value for a static class member at its point of declaration.
+
+And in-class initialization is allowed only for integral types (ints, bools, chars, etc.) and only for constants.
+
+Solution for cases where above syntax can be used:
+
+Put the initial value at the point of definition:
+
+class EngineeringConstants {				// goes in the class header file
+private: 
+	static const double FUDGE_FACTOR;
+	…
+};
+
+// this goes in the class implementation file
+const double EngineeringConstants::FUDGE_FACTOR = 1.35;
+
+This is almost all you need most of the time.
+
+
+But if you need the value of a class constant during compilation of the class, use the “enum hack”
+
+This is for when compilers forbid in-class specification of initial values for integral class constants
+
+This hack takes advantage the values of an enumerated type can be used where ints are expected:
+
+class GamePlayer {
+private:
+	enum { NUM_TURNS = 5 };			
+// “the enum hack” makes NUM_TURNS a symbolic name for 5
+
+	int scores[NUM_TURNS];	// fine!
+…
+};
+
+
+Wont have to use “enum hack” cause this shit was used to old ahh compilers
+Inline functions are better than macros (i.e. #define max(a,b) ((a) > (b) ? (a) : (b)) )
+
+It’s better to inline it:
+inline int max(int a, int b) { return a > b ? a : b; }
+
+Even better to use templates
+template<class T>
+inline const T& max(const T& a, const T& b)
+{ return a > b ? a : b; }
+
+
+Still have to use #include and #ifdef/#ifndef for long days to come
+
+
+
+
+
+Item 2: Prefer <iostream> to <stdio.h>
+
+scanf and printf are not type-safe and not extensible	
+
+int i; 
+Rational r; 
+
+cin » i » r; 
+cout « i « r;
+
+For this code to compile there must be functions operator>> and operator<< that can work with an object of type Rational.
+
+The compiler knows which operator to call for different variables, so no need to worry about the 1st variable to be read or written as an int and the 2nd as type Rational (so compiler knows the type already)
+
+“Built-in types like int are read and written in the same manner as user-defined types like Rational”
+
+
+Here's how you might write an output routine for a class representing rational numbers:
+
+
+
+
+
+
+class Rational {
+public: 
+Rational(int numerator = 0, int denominator = 1) ; 
+private: 
+int n, d; II numerator and denominator friend ostream& operator«(ostream& s, const Rational& r); } ; ostream& operator«(ostream& s, const Rational& r) { s « r.n« 'I' « r.d; ret
+
+
