@@ -1,0 +1,47 @@
+# Nvim setups
+
+cd ~/.config/nvim/lua/custom
+
+chadrc.lua
+init.lua
+
+
+NvChad: 
+
+Cheat Sheet:									space + c + h
+
+Colors:
+Catppuccin
+Doomchad 
+
+
+
+Find files across the directory:						space + f + f
+
+Close current buffer:								space + x
+
+Find files in opened buffers:							space + f + b
+
+Mark files visually:								m
+
+
+
+
+New Tab:									:tabnew
+
+Vertically split buffer:								:vsp or cntrl + w + v
+
+Horizontally split buffer:							:sp or cntrl + w + s
+
+Open new empty buffer:							cntrl + w + n
+
+Open terminal:								space + h
+
+Close terminal: (must be in terminal mode)					cntrl + d
+
+Move around buffers/terminals:						cntrl + h || j || k || l
+
+Close window/buffer:								cntrl + w + q
+
+
+

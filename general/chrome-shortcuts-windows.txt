@@ -1,0 +1,10 @@
+# Chrome shortcuts
+
+
+
+New tab								cntrl + t
+New window								cntrl + n
+Close window								cntrl + w
+
+
+

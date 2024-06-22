@@ -1,0 +1,258 @@
+# Chapter 2
+
+- language is like a mountain: very climb to more high-level representation, then descend to lower-level rep for the CPU to understand and execute
+
+
+- src code -> scanning -> tokens -> parsing -> syntax tree -> semantic analysis -> intermediate representation(s) -> code generation -> machine code
+
+
+- first step: Scanning (Lexical Analysis)
+A scanner (or lexer) takes in stream of characters and chunks them into tokens.
+Token examples: numbers (123), string literals ("hi"), identifiers (min).
+Lexer usually discards comments and whitespaces to create a clean stream of tokens.
+
+
+- second step: Parsing (Parse Tree)
+Consists of grammar (or grammar rules), which makes larger components built by tokens.
+Parser takes a sequence of tokens & builds a tree structure that mirrors the grammar.
+Common names of structures: parse tree, syntax tree, abstract syntax tree (AST's).
+Reports syntax errors to user.
+
+
+- third step: static analysis (or semantic analysis)
+Scanning and parsing are similar across all implementations; here is when lang-spec comes into play.
+At this point, we know the syntactical structure of the code, but nothing else.
+Example: x + y
+We know we are adding x and y, but what do those variables refer to? are they global, private, public? where were they defined?
+
+- Binding or resolution
+For each identifer, we find where that name was defined and wire the two together and we get the scope of it.
+
+If the lang is statically typed, here we type check.
+We can figure out the types of x & y, and see if their types don't support being added together, if not we report a type error.
+
+Here are a few places to store all this semantic information (your choice):
+
+- Attributes
+Info gets stored right back on AST & are extra fields in the nodes that aren't initialized during parsing but now get filled in later.
+
+- Symbol Table
+A look-up table where typically the keys to this table are identifiers (names of variables and declarations).
+The values of the key tell us what the identifer refers to.
+
+- Most powerful tool is to transform the tree entirely into a new datastructure that more directly reps the semantics of the code -- intermediate code representation
+
+
+All this is called the frontend of the compiler, next section is the "middle end".
+
+
+- fourth step: intermediate representations
+front end of compiler is specific to the source language the program is written in.
+back end is concerned with the final architecture where the program will run.
+middle end the code isn't tightly tied to either front or back end (shortname -- IR).
+
+IR acts as an interface between the two.
+This allows you to support multiple source languages and target platforms with less effort.
+
+Example: you want to implement Pascal, C, Fortran compilers and want to target x86, ARM, SPARC.
+Normally, that means you would write 9 full compilers for each lang and target.
+
+A shared IR reduces that dramatically.
+You write 1 frontend for each lang, obviously b/c each lang is different.
+The same for 1 backend for each target architecture.
+Now you can mix and match those to get the combinations you want through IR.
+
+Optimiziations can also come alive from IR.
+
+
+- fifth step: optimization
+once we understand what a program does, we are able to swap it out with a different program that has the same semantics but implements them more efficiently (optimization)
+
+- constant floating
+if some expression evaluates to the exact same value, we can do the evaluation at compile time and replace the code for the expression with its result.
+
+Example:
+pennyArea = 3.14159 * (0.75 / 2) * (0.75 / 2);
+
+We can do all of that arithmetic in the compiler and change the code to:
+pennyArea = 0.4417860938;
+
+Many successful langs have few compile-time opts, but more a focus on run-time opts: CPython and Lua
+
+Optimization keywords for your use:
+“constant propagation”, 
+“common subexpression elimination”, 
+“loop invariant code motion”, 
+“global value numbering”,
+“strength reduction”, 
+“scalar replacement of aggregates”, 
+“dead code elimination”, 
+and “loop unrolling”.
+
+
+- sixth step: code generation
+Last step is converting to a form that a machine can actually run.
+Generating code that is now a primitive assembly-like instructions a CPU can run.
+In back end portion of compiler, like evolution in reverse, more and more primitive.
+
+We have a decision to make:
+do we generate instructions for a real CPU or a virtual one?
+
+If we gen real machine code, we get an executable that the OS can load directly onto the chip.
+It's lightning fast, but a lot of work.
+Also, your compiler is then tied to a specific architecture, i.e. if you target x86, your compiler won't run on ARM.
+
+To get around that, utilize virtual machine code.
+
+- Bytecode (or p-code)
+Hypothetical, idealized, portabile machine code that each instruction is often a byte long (hence the name)
+
+These synthetic instructions are designed to map a little more closely to the
+language’s semantics, and not be so tied to the peculiarities of any one computer
+architecture and its accumulated historical cruft. You can think of it like a
+dense, binary encoding of the language’s low-level operations.
+
+
+- seventh step: runtime
+last step is running the code now.
+
+If we compiled it to machine code, we tell the OS to load the executable and off it goes.
+If we compiled it to bytecode, we need to start up the VM and load the program into that.
+
+In both cases, we need some services that the lang itself provides like instanceof (we need types of each object during execution) or a garbage collector to manage unused bits.
+
+All of this happens at runtime.
+
+In a fully compiled language, the code implementing the runtime gets inserted directly into the resulting executable.
+In, say, Go, each compiled application has
+its own copy of Go’s runtime directly embedded in it.
+
+If the lang is run inside an interpreter or VM, then the runtime lives there.
+This is how most implementations of languages like Java, Python, and JavaScript work.
+
+
+
+# 2.2 Shortcuts and Alternate Routes
+
+- Single-pass compilers
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

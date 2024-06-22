@@ -1,0 +1,12 @@
+# Chapter 1
+
+- self-hosting: 
+You can craft any compiler in any language for any language, including itself -- called a "self-hosting" 
+
+- bootstrapping:
+Create a compiler to compile a new language. Craft a compiler of that new language using the 1st created compiler.
+Now, you can throw away the old compiler, and now use the newly made compiler of that new language to compile futureversions of itself.
+
+- book is broken down in 2 interpreters:
+jlox, in java, focus is concepts.
+clox, in C, focus is detailed implementations.
