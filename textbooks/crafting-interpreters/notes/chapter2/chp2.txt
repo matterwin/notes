@@ -280,23 +280,75 @@ GCC and Clang take your C code and compile it to machine code.
 An end user runs that executable directly and may never even know which tool
 was used to compile it. So those are compilers for C.
 
+What of CPython?
+When your run a Python program using CPython, the code is parse and converted to an internal bytecode format, which is then executed inside the VM.
+From the user's perspective, this is clearly an interpreter -- they run their program from source.
+But underneath CPython's skin, they is compiling.
+
+So here CPython is an interpreter and it has a compiler.
+Most scripting languages work this way.
+
+
+Compiler: 
+javac
+GCC
+Typescript
+CoffeeScript
+Rust 
+clang
+
+Both: (compiler & interpreter)
+C#
+Haskell
+CPython
+YARV (Ruby)
+Guile (Scheme)
+V8 (JS)
+PHP4
+Scala 
+Lua 
+clox 
+Go 
+
+Interpreter:
+MRI (Ruby)
+jlox
+PHP3
+
+The Go tool is even more of a horticultural
+curiosity. If you run go build, it compiles
+your Go source code to machine code and
+stops. If you type go run, it does that then
+immediately executes the generated
+executable.
+
+So go is a compiler (you can use it as a tool to
+compile code without running it), is an
+interpreter (you can invoke it to immediately
+run a program from source), and also has a
+compiler (when you use it as an interpreter, it
+is still compiling internally).
+
+
+The 2nd interpreter we'll do is in that overlapping region, since it internally compiles to bytecode.
 
 
 
 
 
 
+# Challenges
+
+Just-in-time compilation tends to be the fastest way to implement a dynamicallytyped language, but not all of them use it. What reasons are there to not JIT?
+
+Ans: JIT is complex and requires expertise in its development b/c of its benefits for dynamically-typed langs translating code to machine code at runtime.
 
 
 
+Most Lisp implementations that compile to C also contain an interpreter that lets
+them execute Lisp code on the fly as well. Why?
 
-
-
-
-
-
-
-
+Ans: Lisp can be used for interactive development, debugging capabilities, and platform independence
 
 
 
