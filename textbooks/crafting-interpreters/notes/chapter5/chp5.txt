@@ -212,3 +212,21 @@ class Cruller extends Pastry {
 We added one accept() method to each class, and we can use it for as many
 visitors as we want without ever having to touch the pastry classes again. It’s a
 clever pattern.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
