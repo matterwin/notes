@@ -1,0 +1,220 @@
+# Intro notes of video
+
+Link: https://www.youtube.com/watch?v=V_xro1bcAuA&list=LL&index=2
+
+
+
+# What is deep learning?
+
+- dl is a subset of machine learning
+- machine learning is turning things (data i.e images, text, tables of numbers, video, audio, etc) into numbers and finding patterns in those numbers
+
+- ml algo or dl algo finds the patterns via code and math
+
+- this course is code focused
+
+Anatomy
+- AI 
+  - ML
+    - DL
+
+
+Flow of logic:
+
+Traditional programming
+- inputs: chicken, vegetables
+- rules: cut veges, season chicken, cook
+- output: dinnner, cooked chicken and veges ready to eat 
+
+
+ML algo (figures out patterns btw input and output)
+- inputs: chicken, vegetables
+- output: dinnner, cooked chicken and veges ready to eat 
+- rules: cut veges, season chicken, cook
+
+
+Inputs can also be called features
+Output can also be called label
+
+
+
+# Why use machine learning (or DL)?
+
+For a complex problem, can you think of all the rules? (ex self-driving car)
+
+How do you turn left? How do you stop at an intersection? How do you yield when you don't have right away at a 4-stop intersection?
+
+So many questions, a lot of code needed to get this done.
+This is where ML and DL comes into help.
+
+"You can use ML for anything as long as you can convert it into numbers and program it to find patterns"
+"Literally it could be anything, any input or output from the universe"
+
+
+DL is good for:
+- problems with long lists of rules -- when traditional programming fails
+- continually changing environments -- DL can adapt ('learn') to new scenarios
+- discovering insights within large collections of data
+
+
+DL is not good for: (as of 7/12/2024)
+- when you need explainability -- the patterns learning by a DL model are typically uninterpretable by a human
+
+DL models can have billions, even trillions, of parameters -- patterns or numbers of data -- 
+Remember ML is turning things into numbers and then writing a ML model to find patterns in those numbers. 
+Sometimes those patterns themselves can be lists of numbers that are in the millions, billions, etc.
+
+- when the traditional approach is a better option -- if you cna accomplish what you need with a simple rule-based system
+
+- when errors are unacceptable -- since the outputs of DL model aren't always accurate or predictable
+
+- when you don't have much data -- DL models usually require a fairly large amount of data to produce great results
+(though there are ways to mitigate that)
+
+
+
+# Machine Learning vs Deep Learning
+
+ML 
+- want to use traditional ML algos on structured data
+(Algo for working on structured data: gradient boosted machine -- XGBoost)
+So if you have structured data, you might look into xgboost rather than building a DL algo
+(rules aren't set in stone -- ML and DL is an art and a science)
+
+
+DL
+- better for unstructured data -- it's not in your nice standarized rows and columns
+ex: image data, audio files, natural language
+there ways for DL to turn this kind of data to have some sort of structure through the beauty of a tensor
+
+- for unstructured data, you'll want to use a neural network of some kind
+
+
+
+So structured data: 
+- gradient boosted machine, or a random forest, or a tree based algorithm (such as extra boost)
+
+unstructured data:
+- neural networks
+
+
+Official algos for structured vs unstructured (or ml vs dl):
+
+ML:
+- Random forest
+- Gradient boosted models 
+- Naive Bayes 
+- Nearest neighbour 
+- Support vector machine 
+- ... many more
+(since the advent of DL these are often referred to as "shallow algorithms")
+
+
+DL:
+- Neural networks 
+- Fully connected neural networks 
+- Convolutional neural network 
+- Recurrent neural network 
+- Transformer
+- ...many more
+
+
+This course will focus on building neural networks, fully connected neural networks, Convolutional neural networks with PyTorch
+
+
+Depending on your problem, you can use many of these algos for both ... it's a spectrum
+
+
+
+# What are neural networks?
+
+Anatomy of neural networks:
+
+Input layer 
+(Data goes in here)
+- # of units/neurons = 2 
+
+Hidden layer(s)
+(learns patterns in data)
+- # of units/neurons = 3 
+
+Output layer 
+(outputs learned representation or prediction probabilities)
+- # of units/neurons = 1
+
+
+The "deep" in deep learning comes from having lots of layers -- hidden layers
+
+Example: resnet152 has 152 layers -- a popular computer vision algorithm
+
+
+Each layer is usually combination of linear (straight line) and/or non-linear (not-straight line) functions
+
+"patterns" is an arbitrary term, you'll oftern hear "embedding", "weights", "feature representation", "feature vectors" all referring to similar things
+
+At a fundamental level, a neural network is basically using a combination of linear, straight lines, and not straight lines to draw patterns in our data
+
+
+# 5. Different Learning Paradigms
+
+Types of Learning:
+
+1. Supervised Learning
+2. Unsupervised & self-supervised Learning 
+3. Transfer Learning
+
+1. Supervised learning is when you have data (inputs) and labels.
+Ex: is from the beginning, inputs were raw ingredients as vegetables and chicken, and a lot of examples of what that inputs should ideally look like
+Ex: 1,000 photos of a cat and 1,000 photos of a dog, and you pass them to a ML algo to discern
+Data is the photos, and the labels: cat and dog for each of those photos
+
+
+2. Unsupervised and self-supervised learning is you just have the data itself.
+You dont have any labels.
+Ex (cat & dog):
+You only have the photos. You don't have the labels of cat and dog.
+
+You can get a ML algo to learn an inherent representation (patterns, numbers, weights, features, etc.), to figure out the fundamental patterns between a dog and a cat image.
+
+But it doesn't necessarily know the different between the two.
+That's where you could come in later and go show me the patterns you've learned.
+And you go the patterns that look like a cat is this, and for dog, this.
+
+So Unsupervised and self-supervised learning learn solely on the data itself.
+
+
+3. Transfer Learning takes the patterns that one model has learned of a data set and transferring it to another model.
+Ex: if we we're trying to build a Supervised learning algo for discerning btw cat and dog photos, we might start with a model that has already learned patterns and images and transfer those foundational patterns to our own model, so that our models gets a head start.
+
+
+This course will focus on Supervised Learning and Transfer Learning.
+
+
+Bonus 4: Reinforcement Learning 
+You have some kind of environment and an agent that does some actions in that environment.
+You give rewards and observations back to that agent.
+
+Ex: teach your dog to urinate outside. You would give rewards for urinating outside and not giving rewards if the agent (dog) urinated inside.
+
+
+# 6. What can deep learning be used for?
+
+- Recommendation like on YouTube 
+- Translation like google translate 
+- Speech Recognition
+- Computer Vision (security cameras picking up cars or people -- object detection)
+- Natural Language Processing (NLP)
+
+
+Sequence to sequence (seq2seq):
+- one seq in and one seq out
+Ex: audio waves to text out,
+1 language to another language 
+
+
+Classification/regression:
+- Regression is prediction a number 
+Ex: object detection, predicting the coordinates of where these box corners should be.
+So say how many pixels from X angle and however many pixels down from the Y angle, that's that corner, etc.
+
+- Classification is predicting 1 is one thing or another, i.e. from example, what is in the box.

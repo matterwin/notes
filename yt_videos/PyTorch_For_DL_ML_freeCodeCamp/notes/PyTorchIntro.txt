@@ -1,0 +1,67 @@
+# 7. What is/why PyTorch?
+
+
+
+# What is PyTorch?
+
+- most popular research deep learning framework
+- write fase deep learning code in Python (able to run on a GPU/many GPUs)
+- able to access many pre-build deep learning models (Torch Hub/ torchvision.models)
+- whole stack: preprocess data, model data, deploy model in your application/cloud
+- originally designed and used in-house by Facebook/Meta, and used by many such as Tesla, Microsoft, OpenAI
+
+
+
+# What is a GPU/TPU?
+
+- Graphics Processing Unit
+very fast at crunching numbers
+
+PyTorch enables you to leverage a GPU through an interface called CUDA to run your ML code to run on GPUs
+
+- Tensor Processing Unit 
+not as popular as GPUs
+ML and DL deals with a lot with tensors.
+
+
+
+# What is a tensor?
+
+- a tensor is a representation of numbers (wow lol)
+
+before data gets used with an algorithm, it needs to be turned into numbers, so a tensor.
+
+That tensor gets passed to a neural network, which performs mathematical operations on that tensor.
+A lot of those operations are taken care of by PyTorch behind the scenes.
+
+We'll be writing code to execute some kind of mathematical operations on these tensors.
+
+And then the neural network that we create or thats already been created and we're using, will output another tensor, similar to the input, but has manipulated in a certain way that we've sort of programmed it to.
+
+Then we take the output tensor and change it into something that a human can understand.
+
+
+Big picture:
+
+If we are focusing on building a classification model.
+We would have images as input.
+We would turn those images into numbers, which are represented by a tensor.
+We would pass that tensor of numbers to a neural network, or have lots of tensors to pass onto.
+
+The principle is that you encode your data in some form of numerical representation, which is a tensor.
+Pass that tensor, or lots of tensors to a neural network.
+The neural network performs mathematical operations on those tensors, and outputs a tensor.
+We convert that tensor into something that we can understand as humans.
+
+
+
+# outline of course code 
+
+- pytorch basics and fundamentals (dealing with tensors and tensor operations)
+- preprocessing data (getting it into tensors)
+- building and using pretrained deep learning models
+- fitting a model to the data (learning patterns)
+- making predictions with a model (using patterns)
+- evaluating model predictions 
+- saving and loading models 
+- using a trained model to make predictions on custom data
